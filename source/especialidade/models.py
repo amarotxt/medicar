@@ -5,4 +5,4 @@ class Especialidade(models.Model):
     nome = models.CharField(max_length=120)
 
     def __str__(self):
-        return self.name
+        return self.nome
