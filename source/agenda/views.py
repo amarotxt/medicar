@@ -4,7 +4,7 @@ from agenda.models import Agenda
 from agenda.serializers import AgendaSerializer
 # Create your views here.
 
-class AgendaView(viewsets.ModelViewSet):
+class AgendaViewSet(viewsets.ModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
 
