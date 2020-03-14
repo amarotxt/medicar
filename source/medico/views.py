@@ -5,7 +5,7 @@ from medico.serializers import MedicoSerializer
 # Create your views here.
 
 class MedicoViewSet(viewsets.ModelViewSet):
-    queryset = medico.objects.all()
+    queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
 
 

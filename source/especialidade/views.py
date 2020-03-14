@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from especialidade.models import Especialidade
 from especialidade.serializers import EspecialidadeSerializer
 # Create your views here.
 
 class EspecialidadeViewSet(viewsets.ModelViewSet):
-    queryset = especialidade.objects.all()
+    queryset = Especialidade.objects.all()
     serializer_class = EspecialidadeSerializer
-
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def list(self, request):
         return super().list(request)
