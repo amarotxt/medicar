@@ -1,7 +1,7 @@
-from agenda.models import Agenda
+from medico.models import Medico
 from rest_framework.serializers import ModelSerializer
 
 class MedicoSerializer(ModelSerializer):
      class Meta:
-        model = Agenda
+        model = Medico
         fields = '__all__'
