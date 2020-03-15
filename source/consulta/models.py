@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError
 # Create your models here.
 
 
@@ -49,13 +49,19 @@ class Consulta(models.Model):
         #  o usuário já possui uma consulta marcada no
         #  mesmo dia e horário
         # TODO: corrigir texto do error
-        agenda = Consulta.objects.filter(
-            agennda=agenda, horarios=horario).exists()
-        if agenda:
+        consulta = Consulta.objects.filter(
+            agenda=agenda, horario=horario).exists()
+        if consulta:
             raise ValidationError("Este horario ja esta preenchido.")
         return
 
+
+    def save(self, **kwargs):
+        self.clean()
+        return super().save(kwargs)
+
     def clean(self):
+        # raise Exception("aq")
         self.check_data_hora_passado(self.agenda.dia, self.horario)
         self.check_usuario_possui_consulta(
             self.user, self.agenda.dia, self.horario)

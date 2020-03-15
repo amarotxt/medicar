@@ -13,6 +13,10 @@ class Agenda(models.Model):
     dia = models.DateField(validators=[dia_passado])
     horarios = ArrayField(models.TimeField())
      
+    def save(self, **kwargs):
+        self.clean()
+        return super().save(kwargs)
+        
     def clean(self):
         agenda_dia = Agenda.objects.filter(dia=self.dia, medico=self.medico)
         if agenda_dia.exists():
