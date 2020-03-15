@@ -12,7 +12,7 @@ class Agenda(models.Model):
     medico = models.ForeignKey('medico.Medico', on_delete=models.CASCADE)
     dia = models.DateField(validators=[dia_passado])
     horarios = ArrayField(models.TimeField())
-
+     
     def clean(self):
         agenda_dia = Agenda.objects.filter(dia=self.dia, medico=self.medico)
         if agenda_dia.exists():

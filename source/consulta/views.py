@@ -32,7 +32,8 @@ class ConsultaViewSet(viewsets.ModelViewSet):
 
         # return super().list(request)
 
-    def create(self, request):
+    def create(self, request, *args, **kwargs):
+        raise Exception(reques)
         return super().create(request)
 
     def retrieve(self, request, pk=None):
