@@ -13,7 +13,4 @@ class AgendaSerializer(ModelSerializer):
          'horarios',
          'medico'
       ]
-      extra_kwargs = {
-            'medico': {'view_name': 'accounts', 'lookup_field': 'account_name'},
-            'users': {'lookup_field': 'username'}
-        }
+      

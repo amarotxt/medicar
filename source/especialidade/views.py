@@ -6,7 +6,7 @@ from especialidade.models import Especialidade
 from especialidade.serializers import EspecialidadeSerializer
 # Create your views here.
 from rest_framework import filters
-
+    
 
 class EspecialidadeViewSet(viewsets.ModelViewSet):
     queryset = Especialidade.objects.all()
@@ -20,16 +20,16 @@ class EspecialidadeViewSet(viewsets.ModelViewSet):
         return super().list(request)
 
     def create(self, request):
-        return super().create(request)
+        pass
 
     def retrieve(self, request, pk=None):
-        return super().retrieve(request)
-
+        pass
+    
     def update(self, request, pk=None):
-        return super().update(request)
-
+        pass
+    
     def partial_update(self, request, pk=None):
-        return super().partial_update(request)
+        pass
 
     def destroy(self, request, pk=None):
-        return super().destroy(request)
+        pass

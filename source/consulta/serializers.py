@@ -2,6 +2,7 @@ from .models import Consulta
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from agenda.models import Agenda
+
 class ConsultaSerializer(ModelSerializer):
    dia = serializers.SerializerMethodField()
    medico = serializers.SerializerMethodField()

@@ -54,10 +54,10 @@ OK.
     - Intervalo de data
 
 
-Regras de negócio
-* As agendas devem vir ordenadas por ordem crescente de data
-* Agendas para datas passadas ou que todos os seus horários já foram preenchidos devem ser excluídas da listagem
-* Horários dentro de uma agenda que já passaram ou que foram preenchidos devem ser excluídos da listagem
+    Regras de negócio
+    - As agendas devem vir ordenadas por ordem crescente de data
+    * Agendas para datas passadas ou que todos os seus horários já foram preenchidos devem ser excluídas da listagem
+    * Horários dentro de uma agenda que já passaram ou que foram preenchidos devem ser excluídos da listagem
 
 consulta:
 marcar consulta:

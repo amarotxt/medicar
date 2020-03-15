@@ -4,12 +4,17 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from consulta.models import Consulta
 from consulta.serializers import ConsultaSerializer
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 class ConsultaViewSet(viewsets.ModelViewSet):
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
     
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def list(self, request):
         #  - Regra de negocio para
@@ -20,7 +25,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
         # do dia e horário da consulta
         
         date_now =  datetime.now().date()
-        queryset = self.filter_queryset(self.get_queryset()).filter(dia__gte=date_now).order_by('-data_agendamento','horario')
+        queryset = self.filter_queryset(self.get_queryset()).filter(agenda__dia__gte=date_now).order_by('-data_agendamento','horario')
         
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -36,14 +41,8 @@ class ConsultaViewSet(viewsets.ModelViewSet):
         raise Exception(reques)
         return super().create(request)
 
-    def retrieve(self, request, pk=None):
-        return super().retrieve(request)
+    def delete(self, request, *args, **kwargs):
+        raise Exception(reques)
+        return super().create(request)
 
-    def update(self, request, pk=None):
-        return super().update(request)
-
-    def partial_update(self, request, pk=None):
-        return super().partial_update(request)
-
-    def destroy(self, request, pk=None):
-        return super().destroy(request)
+    

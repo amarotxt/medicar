@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.postgres.fields import ArrayField
 
 def dia_passado(value):
-    if datetime.now().date() >= value:
+    if datetime.now().date() > value:
         raise ValidationError('Não é possivel criar uma agenda com a data passada.')
 
 # Create your models here.
