@@ -6,7 +6,7 @@ from consulta.views import ConsultaViewSet
 
 
 router = routers.DefaultRouter()
-router.register(r'agenda', AgendaViewSet)
-router.register(r'especialidade', EspecialidadeViewSet)
-router.register(r'medico', MedicoViewSet)
-router.register(r'consulta', ConsultaViewSet)
+router.register(r'agendas', AgendaViewSet)
+router.register(r'especialidades', EspecialidadeViewSet)
+router.register(r'medicos', MedicoViewSet)
+router.register(r'consultas', ConsultaViewSet)

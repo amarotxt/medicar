@@ -9,8 +9,8 @@ class AgendaSerializer(ModelSerializer):
       model = Agenda
       fields = [
          'id',
+         'medico',
          'dia',
-         'horarios',
-         'medico'
+         'horarios'
       ]
       

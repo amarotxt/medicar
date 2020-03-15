@@ -7,7 +7,7 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated
 from agenda.models import Agenda
 from agenda.serializers import AgendaSerializer
-from .filters import DateFilter
+from .filters import AgendaFilter
 from consulta.models import Consulta
 
 # Create your views here.
@@ -18,9 +18,9 @@ class AgendaViewSet(viewsets.ModelViewSet):
     serializer_class = AgendaSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
-    filter_class = DateFilter
+    filter_class = AgendaFilter
     filter_backends = (DjangoFilterBackend, )
-    filterset_fields = ['medico', 'especialidade']
+    # filterset_fields = ['medico', ]
 
     @classmethod
     def clean_list_dates(cls, queryset):
