@@ -45,6 +45,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         return super().create(request)
         
+        
     @classmethod
     def check_consulta_aconteceu(cls, consulta): 
         # Regra de negocio:
@@ -52,9 +53,9 @@ class ConsultaViewSet(viewsets.ModelViewSet):
         today =datetime.now().date()
         hour =datetime.now().time()
         if today > consulta.agenda.dia:
-            raise ValidationError("Esta consulta ja aconteuceu") 
+            raise ValidationError("Esta consulta já aconteceu") 
         elif today == consulta.agenda.dia and hour > consulta.horario:
-            raise ValidationError("Esta consulta ja aconteuceu")
+            raise ValidationError("Esta consulta já aconteceu")
         return 
 
     def delete(self, request, *args, **kwargs):
@@ -64,14 +65,15 @@ class ConsultaViewSet(viewsets.ModelViewSet):
         #  Não deve ser possível desmarcar uma consulta que 
         # não foi marcada pelo usuário logado
         if not instance:
-            raise ValidationError("Esta Consulta nao existe")
+            raise ValidationError("Esta consulta não existe.")
 
         check_consulta_aconteceu(instance)
 
         if request.user.is_staff or request.user == instance.user:
             self.perform_destroy(instance)
         else:
-            raise ValidationError("""Usuario nao possui permisssao  
-             para deletar esta consulta""")
+            raise ValidationError("""O usuário não possui permissão 
+                para deletar esta consulta.
+                Esta consulta já aconteceu.""")
 
         return super().delete(request)
