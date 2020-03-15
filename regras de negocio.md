@@ -16,34 +16,42 @@ OK:
     
 ### api :   
 
-#### especialidade :   
-### filtro
-- "nome da especialidade"
-    
+OK:
 
-#### medico :
-### filtros :
-- "Identificador de uma ou 
-            mais especialidades;"
-- Nome do médico (termo 
+    #### especialidade :   
+
+    ### filtro
+    - "nome da especialidade"
+        
+
+    #### medico :
+    ### filtros :
+    - "Identificador de uma ou 
+                mais especialidades;"
+    - Nome do médico (termo 
             de pesquisa).
         
 #### consulta :
-regras de negocio:
-- A listagem não deve exibir 
-            consultas para dia e horário passados;
-- Os itens da listagem 
-             devem vir ordenados por
-             ordem crescente do dia e 
-             horário da consulta
+
+OK.
+
+    regras de negocio:
+    - A listagem não deve exibir 
+        consultas para dia e horário passados;
+    - Os itens da listagem 
+                devem vir ordenados por
+                ordem crescente do dia e 
+                horário da consulta
 #### agenda:
 
-filtros:
-- Identificador de um
-                 ou mais medicos
-- Identificador de uma 
-                ou mais especialidades
-- Intervalo de data
+OK.
+
+    filtros:
+    - Identificador de um
+                    ou mais medicos
+    - Identificador de uma 
+                    ou mais especialidades
+    - Intervalo de data
 
 
 Regras de negócio

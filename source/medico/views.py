@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 from medico.models import Medico
 from medico.serializers import MedicoSerializer
 # Create your views here.
@@ -7,7 +9,9 @@ from medico.serializers import MedicoSerializer
 class MedicoViewSet(viewsets.ModelViewSet):
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
-
+    filter_backends = (DjangoFilterBackend, filters.SearchFilter, )
+    search_fields = ['nome']
+    filterset_fields = ['especialidade']
 
     def list(self, request):
         return super().list(request)
