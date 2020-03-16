@@ -40,38 +40,36 @@ class ConsultaViewSet(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
-        # return super().list(request)
-
     def create(self, request, *args, **kwargs):
         return super().create(request)
-        
+
     @classmethod
-    def check_consulta_aconteceu(cls, consulta): 
+    def check_consulta_aconteceu(cls, consulta):
         # Regra de negocio:
         #   Não deve ser possível desmarcar uma consulta que já aconteceu
-        today =datetime.now().date()
-        hour =datetime.now().time()
+        today = datetime.now().date()
+        hour = datetime.now().time()
         if today > consulta.agenda.dia:
-            raise ValidationError("Esta consulta ja aconteuceu") 
+            raise ValidationError("Esta consulta já aconteceu")
         elif today == consulta.agenda.dia and hour > consulta.horario:
-            raise ValidationError("Esta consulta ja aconteuceu")
-        return 
+            raise ValidationError("Esta consulta já aconteceu")
+        return
 
     def delete(self, request, *args, **kwargs):
         instance = self.get_object()
-        # TODO: modificar mensagens de error
         # Regra de negocio:
-        #  Não deve ser possível desmarcar uma consulta que 
+        #  Não deve ser possível desmarcar uma consulta que
         # não foi marcada pelo usuário logado
         if not instance:
-            raise ValidationError("Esta Consulta nao existe")
+            raise ValidationError("Esta consulta não existe.")
 
         check_consulta_aconteceu(instance)
 
         if request.user.is_staff or request.user == instance.user:
             self.perform_destroy(instance)
         else:
-            raise ValidationError("""Usuario nao possui permisssao  
-             para deletar esta consulta""")
+            raise ValidationError("""O usuário não possui permissão 
+                para deletar esta consulta.
+                Esta consulta já aconteceu.""")
 
         return super().delete(request)

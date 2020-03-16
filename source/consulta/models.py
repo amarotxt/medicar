@@ -18,14 +18,15 @@ class Consulta(models.Model):
         #  para um dia e horário passados
         today = datetime.now().date()
         time_now = datetime.now().time()
-        # TODO: corrigir texto do error
+       
         if today > data:
+           
             raise ValidationError(
-                "Nao e possivel cadastrar consulta para datas passadas.")
+                "Não é possível cadastrar consultas para datas passadas.")
         else:
             if time_now > hora:
                 raise ValidationError(
-                    "Nao e possivel cadastrar consulta para datas passadas.")
+                    "Não é possível cadastrar consultas para datas passadas.")
         return
 
     @classmethod
@@ -34,12 +35,10 @@ class Consulta(models.Model):
         # Não deve ser possível marcar uma consulta se
         #  o usuário já possui uma consulta marcada no
         #  mesmo dia e horário
-        # TODO: corrigir texto do error
-
         consultas_user = Consulta.objects.filter(
             user__pk=user.pk, agenda__dia=dia, horario=horario).exists()
         if consultas_user:
-            raise ValidationError("Usuario ja possui consulta nesta data")
+            raise ValidationError("O usuário já possui consulta para esta data.")
         return
 
     @classmethod
@@ -48,11 +47,10 @@ class Consulta(models.Model):
         # Não deve ser possível marcar uma consulta se
         #  o usuário já possui uma consulta marcada no
         #  mesmo dia e horário
-        # TODO: corrigir texto do error
         consulta = Consulta.objects.filter(
             agenda=agenda, horario=horario).exists()
         if consulta:
-            raise ValidationError("Este horario ja esta preenchido.")
+            raise ValidationError("Este horário já está preenchido.")
         return
 
 
@@ -61,7 +59,6 @@ class Consulta(models.Model):
         return super().save(kwargs)
 
     def clean(self):
-        # raise Exception("aq")
         self.check_data_hora_passado(self.agenda.dia, self.horario)
         self.check_usuario_possui_consulta(
             self.user, self.agenda.dia, self.horario)
