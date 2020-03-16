@@ -18,7 +18,7 @@ class Consulta(models.Model):
         #  para um dia e horário passados
         today = datetime.now().date()
         time_now = datetime.now().time()
-        # TODO: corrigir texto do error
+       
         if today > data:
            
             raise ValidationError(
@@ -35,8 +35,6 @@ class Consulta(models.Model):
         # Não deve ser possível marcar uma consulta se
         #  o usuário já possui uma consulta marcada no
         #  mesmo dia e horário
-        # TODO: corrigir texto do error
-
         consultas_user = Consulta.objects.filter(
             user__pk=user.pk, agenda__dia=dia, horario=horario).exists()
         if consultas_user:
@@ -49,7 +47,6 @@ class Consulta(models.Model):
         # Não deve ser possível marcar uma consulta se
         #  o usuário já possui uma consulta marcada no
         #  mesmo dia e horário
-        # TODO: corrigir texto do error
         consulta = Consulta.objects.filter(
             agenda=agenda, horario=horario).exists()
         if consulta:
@@ -62,7 +59,6 @@ class Consulta(models.Model):
         return super().save(kwargs)
 
     def clean(self):
-        # raise Exception("aq")
         self.check_data_hora_passado(self.agenda.dia, self.horario)
         self.check_usuario_possui_consulta(
             self.user, self.agenda.dia, self.horario)
