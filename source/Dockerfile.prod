@@ -1,0 +1,67 @@
+FROM python:3 as builder
+
+WORKDIR /usr/src/app
+
+ENV PYTHONUNBUFFERED 1
+# RUN mkdir /source
+
+
+RUN pip install --upgrade pip
+RUN pip install flake8
+COPY . /usr/src/app/
+# RUN flake8 --ignore=E501,F401 .
+
+# install dependencies
+COPY ./requirements.txt .
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
+
+#############################################
+FROM python:3
+
+RUN mkdir -p /home/source
+
+# RUN addgroup -S source && adduser -S source -G source
+
+
+# create the appropriate directories
+ENV HOME=/home/source
+ENV APP_HOME=/home/source/medicar
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+WORKDIR $APP_HOME
+
+
+
+
+# install dependencies
+# RUN apk update && apk add libpq
+COPY --from=builder /usr/src/app/wheels /wheels
+COPY --from=builder /usr/src/app/requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install --no-cache /wheels/*
+
+# copy entrypoint-prod.sh
+COPY docker-entrypoint.sh $APP_HOME
+
+
+# copy project
+# COPY . $APP_HOME
+COPY --chown=82:82  .  $APP_HOME
+RUN chown -R 82:82 $HOME
+
+# RUN set -x \
+#     && addgroup -g 82 -S www-data \
+#     && adduser -u 82 -D -S -G www-data www-data
+COPY docker-entrypoint.sh /usr/bin/
+RUN ln -s /usr/bin/docker-entrypoint.sh /docker-entrypoint.sh
+ENTRYPOINT ["docker-entrypoint.sh"]
+# COPY ./entrypoint.prod.sh $APP_HOME
+
+# chown all the files to the app user
+# RUN chown -R source:source $APP_HOME
+
+# change to the app user
+# USER source
+
+# chown all the files to the app user
+# RUN chown -R source:source $APP_HOME
