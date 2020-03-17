@@ -15,9 +15,11 @@ Executar o comando :
 
 Acessa o navegador em [Como usar o Figma](https://localhost)
 
-### Logar na [administracao](https://localhost/admin) com:
+### Logar na [administração](https://localhost/admin) com login de gestor:
 ```
-
     usuario : gestor
     password :  1@345678
 ```
+
+## Criar [Usuario](http://localhost/accounts/signup/):
+    link : http://localhost/accounts/signup/
