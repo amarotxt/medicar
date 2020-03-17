@@ -7,6 +7,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from medico.models import Medico
 from medico.serializers import MedicoSerializer
 
+
 # Create your views here.
 
 class MedicoViewSet(viewsets.ModelViewSet):
