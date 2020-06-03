@@ -1,4 +1,5 @@
 from datetime import datetime
+# from datetime import timedelta
 from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
@@ -15,20 +16,31 @@ from consulta.models import Consulta
 class AgendaRegrasdeNegocio(object):
     def list_rn(self, queryset):
         #Regra de negocio:
+        # Horários dentro de uma agenda que já passaram 
+        for agenda in queryset:
+            if agenda.dia == datetime.now().date():
+                for passado in agenda.horarios.all():
+                    if passado.horario.strftime('%H:%M') < f'{datetime.today().hour}:{datetime.today().minute}':
+                        agenda.horarios.remove(passado.id)
+
+        # Horários que foram preenchidos devem ser excluídos da listagem(ao
+        # cadastrar consulta o horario esta sendo removido da agenda
+        # assim removendo da listagem)
+# queryset
+        #  Agendas que todos os seus horários já foram preenchidos devem 
+        # ser excluídas da listagem
+        queryset = queryset.exclude(horarios=None)
+            
         # Ordenado por ordem crecente 
         queryset = queryset.order_by('dia')
-        
-        # TODO: Agendas para datas passadas ou que todos os seus
-        # horários já foram preenchidos devem ser excluídas 
+
+        # Agendas para datas passadas devem ser excluídas 
         # da listagem
-
-        return queryset
-
-    def retirar_horarios_listagem(self, data):
-        # TODO: Horários dentro de uma agenda que já passaram ou
-        #  que foram preenchidos devem ser excluídos da listagem
+        queryset = queryset.filter(dia__gte=datetime.now())
         
-        return data
+        return queryset
+        
+
 
 class AgendaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Agenda.objects.all()
@@ -44,7 +56,7 @@ class AgendaViewSet(viewsets.ReadOnlyModelViewSet):
     def list(self, request):
         queryset = self.filter_queryset(self.get_queryset())
 
-        queryset = AgendaRegrasdeNegocio.list_rn(queryset)
+        queryset = AgendaRegrasdeNegocio().list_rn(queryset)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -53,7 +65,8 @@ class AgendaViewSet(viewsets.ReadOnlyModelViewSet):
 
         serializer = self.get_serializer(queryset, many=True)
         
-        data = AgendaRegrasdeNegocio.retirar_horarios_listagem(serializer.data)
+        return Response(serializer.data)
         
-        return Response(data)
-        
+
+
+      

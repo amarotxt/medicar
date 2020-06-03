@@ -4,13 +4,11 @@ from django.contrib import admin
 from .models import Agenda
 from .models import Horario
 
-class HorarioInline(admin.TabularInline):
-    model=Horario
-
 @admin.register(Agenda)
 class AgendaAdmin(admin.ModelAdmin):
-    inlines = [HorarioInline] 
-    pass
+    model = Agenda
+    filter_horizontal = ('horarios',)
+    
 
 
-# admin.site.register(Agenda)
+admin.site.register(Horario)
