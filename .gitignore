@@ -88,6 +88,7 @@ venv.bak/
 /site 
 
 /staticfiles
+*/staticfiles
 
 # mypy 
 .mypy_cache/ 
