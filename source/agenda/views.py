@@ -12,8 +12,25 @@ from consulta.models import Consulta
 
 # Create your views here.
 
+class AgendaRegrasdeNegocio(object):
+    def list_rn(self, queryset):
+        #Regra de negocio:
+        # Ordenado por ordem crecente 
+        queryset = queryset.order_by('dia')
+        
+        # TODO: Agendas para datas passadas ou que todos os seus
+        # horários já foram preenchidos devem ser excluídas 
+        # da listagem
 
-class AgendaViewSet(viewsets.ModelViewSet):
+        return queryset
+
+    def retirar_horarios_listagem(self, data):
+        # TODO: Horários dentro de uma agenda que já passaram ou
+        #  que foram preenchidos devem ser excluídos da listagem
+        
+        return data
+
+class AgendaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -22,46 +39,21 @@ class AgendaViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, )
     # filterset_fields = ['medico', ]
 
-    @classmethod
-    def clean_list_dates(cls, queryset):
-        #Horários dentro de uma agenda que já
-        #passaram ou que foram preenchidos 
-        # devem ser excluídos da listagem
-        time_now = datetime.now().time()
-        for agenda in queryset:
-            agenda.horarios = [horario for horario in agenda.horarios if horario > time_now]   
 
-        return queryset
 
     def list(self, request):
-        date_now = datetime.now().date()
-        queryset = self.clean_list_dates(
-            self.filter_queryset(
-                self.get_queryset()).filter(
-                    dia__gte=date_now).order_by(
-                        '-dia', 'horarios'))
-        # consultas = Consultas.objects.all()
-        # raise Exception(queryset)
+        queryset = self.filter_queryset(self.get_queryset())
+
+        queryset = AgendaRegrasdeNegocio.list_rn(queryset)
+
         page = self.paginate_queryset(queryset)
         if page is not None:
-            serializer=self.get_serializer(page, many=True)
+            serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
 
-        serializer=self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
-
-
-    def create(self, request):
-        return super().create(request)
-
-    def retrieve(self, request, pk=None):
-        return super().retrieve(request)
-
-    def update(self, request, pk=None):
-        return super().update(request)
-
-    def partial_update(self, request, pk=None):
-        return super().partial_update(request)
-
-    def destroy(self, request, pk=None):
-        return super().destroy(request)
+        serializer = self.get_serializer(queryset, many=True)
+        
+        data = AgendaRegrasdeNegocio.retirar_horarios_listagem(serializer.data)
+        
+        return Response(data)
+        
