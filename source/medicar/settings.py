@@ -26,8 +26,7 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
-# Application definition
-
+FORMAT_MODULE_PATH = 'medicar.formats'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -52,10 +51,13 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'django_filters',
     'rest_framework',
+    'corsheaders',
+    'usuario',
     'medico',
     'consulta',
     'especialidade',
     'agenda'
+
 ]
 
 SITE_ID = 1
@@ -63,6 +65,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # Note that this needs to be placed above CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -149,16 +152,23 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        
+        'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
     ]
 }
 
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
 #Configurar login com google configurar valores na ENV 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -169,4 +179,10 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': os.environ.get("GOOGLE_KEY", "0000"),
         }
     }
+}
+
+
+# JWT CONFIG AUTHENTICATION
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'medicar.utils.my_jwt_response_handler'
 }
