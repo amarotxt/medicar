@@ -10,7 +10,7 @@ from medico.serializers import MedicoSerializer
 
 # Create your views here.
 
-class MedicoViewSet(viewsets.ModelViewSet):
+class MedicoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -18,17 +18,3 @@ class MedicoViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, )
     search_fields = ['nome']
     filterset_fields = ['especialidade']
-
-    def list(self, request):
-        return super().list(request)
-
-    def create(self, request):
-        pass
-    def retrieve(self, request, pk=None):
-        return super().retrieve(request)
-    def update(self, request, pk=None):
-        pass
-    def partial_update(self, request, pk=None):
-        pass
-    def destroy(self, request, pk=None):
-        pass

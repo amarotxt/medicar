@@ -8,28 +8,10 @@ from especialidade.serializers import EspecialidadeSerializer
 from rest_framework import filters
     
 
-class EspecialidadeViewSet(viewsets.ModelViewSet):
+class EspecialidadeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Especialidade.objects.all()
     serializer_class = EspecialidadeSerializer
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.SearchFilter]
     search_fields = ['nome']
-
-    def list(self, request):
-        return super().list(request)
-
-    def create(self, request):
-        pass
-
-    def retrieve(self, request, pk=None):
-        pass
-    
-    def update(self, request, pk=None):
-        pass
-    
-    def partial_update(self, request, pk=None):
-        pass
-
-    def destroy(self, request, pk=None):
-        pass
