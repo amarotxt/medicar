@@ -6,7 +6,7 @@ django-filter==2.2.0
 django-extensions==2.2.8
 Werkzeug==1.0.0
 gunicorn==19.9.0 
-django-allauth
-djangorestframework-jwt
+# django-allauth
+# djangorestframework-jwt
 django-cors-headers
 # psycopg2==2.8.4
