@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
-from rest_framework.authentication import TokenAuthentication #SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication #, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from consulta.models import Consulta
 from consulta.serializers import ConsultaSerializer
@@ -16,7 +16,7 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     queryset = Consulta.objects.all()
     serializer_class = ConsultaSerializer
 
-    authentication_classes = (TokenAuthentication, )
+    authentication_classes = (TokenAuthentication, SessionAuthentication, )
     permission_classes = (IsAuthenticated, )
 
     def list(self, request):

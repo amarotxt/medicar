@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'usuario',
     'medico',
     'consulta',
     'especialidade',
@@ -169,14 +168,14 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
 )
-#Configurar login com google configurar valores na ENV 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
+# #Configurar login com google configurar valores na ENV 
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
  
-        'APP': {
-            'client_id':  os.environ.get("GOOGLE_ID", "0000"),
-            'secret':  os.environ.get("GOOGLE_SECRET", "0000"),
-            'key': os.environ.get("GOOGLE_KEY", "0000"),
-        }
-    }
-}
+#         'APP': {
+#             'client_id':  os.environ.get("GOOGLE_ID", "0000"),
+#             'secret':  os.environ.get("GOOGLE_SECRET", "0000"),
+#             'key': os.environ.get("GOOGLE_KEY", "0000"),
+#         }
+#     }
+# }
