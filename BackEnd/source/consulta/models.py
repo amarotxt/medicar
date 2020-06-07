@@ -6,8 +6,8 @@ from rest_framework.exceptions import ValidationError
 
 
 class Consulta(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    agenda = models.ForeignKey("agenda.Agenda", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    agenda = models.ForeignKey("agenda.Agenda", on_delete=models.PROTECT)
     horario = models.TimeField()
     data_agendamento = models.DateTimeField(auto_now=True)
 
@@ -59,13 +59,15 @@ class Consulta(models.Model):
         # Não deve ser possível marcar uma consulta se
         #  o usuário já possui uma consulta marcada no
         #  mesmo dia e horário
-        if Agenda.objects.filter(medico=agenda.medico, horarios__horario=self.horario).exists() == False:
+        if  not agenda.horarios.filter(horario=horario).exists():
             raise ValidationError({"Este horário não existe na agenda do médico"})
  
 
     def save(self, **kwargs):
         self.clean()
-        self.agenda.horarios.filter(horario=self.horario).remove()
+        # raise Exception(self.agenda.horarios.filter(horario=self.horario))
+        horario_remove = self.agenda.horarios.filter(horario=self.horario).first()
+        self.agenda.horarios.remove(horario_remove)
         self.agenda.save()
         return super().save(kwargs)
 

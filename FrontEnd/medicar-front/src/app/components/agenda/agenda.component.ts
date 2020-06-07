@@ -9,19 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgendaComponent implements OnInit {
   agendas: Array<any>;
+  selctAgenda: any;
   constructor(
     private router: Router, 
     private _route: ActivatedRoute,
     private api: ApiService
   ) { }
-  
   ngOnInit(): void {
     const medicoId = +this._route.snapshot.params.medicoId;
     this.getAgendasMedico(medicoId);
+    this.selctAgenda = null;
   }
 
   getAgendasMedico = (medicoId: number) => {
-    console.log(medicoId)
     this.api.getAgendasMedico(medicoId).subscribe(
       data => {
         this.agendas = data;
@@ -30,4 +30,19 @@ export class AgendaComponent implements OnInit {
       }
     );
   }
+
+  selectHoraConsulta(hora: string){
+    let consulta = {
+      agenda: this.selctAgenda.id,
+      horario: hora,
+    } 
+    this.api.postCreateConsulta(consulta).subscribe(
+      data => {
+        this.agendas = data;
+      }, error => {
+        console.error(error);
+      }
+    );
+  }
+
 }
