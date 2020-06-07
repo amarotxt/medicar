@@ -30,7 +30,6 @@ export class MedicosComponent implements OnInit {
     );
   }
   chosenMedico = (medicoId) =>  {
-    console.log(medicoId);
     this.router.navigate(['list-agendas', medicoId]);
   }
 }
