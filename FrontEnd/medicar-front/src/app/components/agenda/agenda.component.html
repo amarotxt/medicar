@@ -1,0 +1,9 @@
+<div class="container">
+    <h3 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> Selecione um medic o</h3>
+
+    <ul class="list-group">
+        <li class="list-group-item agenda-chosen" id="agenda-{{ agenda.id }}" *ngFor="let agenda of agendas" >
+        {{ agenda.dia }}
+        </li>
+    </ul>
+</div>
