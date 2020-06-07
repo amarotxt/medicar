@@ -20,7 +20,8 @@ class AgendaRegrasdeNegocio(object):
         for agenda in queryset:
             if agenda.dia == datetime.now().date():
                 for passado in agenda.horarios.all():
-                    if passado.horario.strftime('%H:%M') < f'{datetime.today().hour}:{datetime.today().minute}':
+                    if passado.horario.strftime('%H:%M') < datetime.now().strftime('%H:%M'):
+                        raise Exception(f'{datetime.today().hour}:{datetime.today().minute}')
                         agenda.horarios.remove(passado.id)
 
         # Horários que foram preenchidos devem ser excluídos da listagem(ao
