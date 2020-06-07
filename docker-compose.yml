@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    # environment: 
+    #   POSTGRES_DB: "db"
+    #   POSTGRES_PASSWORD: "qwerty"
+    env_file: 
+      - ./BackEnd/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  
+  medicar:
+    build: 
+      context: .
+      dockerfile: ./BackEnd/Dockerfile
+    command: python manage.py runserver_plus 0.0.0.0:8000
+    env_file: 
+      - ./BackEnd/.env
+    volumes:
+      - ./BackEnd/source/:/source
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  # medicar-front:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./FrontEnd/Dockerfile
+  #   command: npm run dev
+  #   # env_file: 
+  #   #   - .env
+  #   volumes:
+  #     - ./FrontEnd/medicar/:/app/
+  #   ports:
+  #     - "3001:3000"
+volumes:
+  postgres_data:
