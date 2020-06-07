@@ -35,14 +35,16 @@ export class AgendaComponent implements OnInit {
     let consulta = {
       agenda: this.selctAgenda.id,
       horario: hora,
-    } 
-    this.api.postCreateConsulta(consulta).subscribe(
-      data => {
-        this.agendas = data;
-      }, error => {
-        console.error(error);
-      }
-    );
+    }
+    if(confirm(`Marcar consulta para o dia ${this.selctAgenda.dia} as ${hora}`)){
+      this.api.postCreateConsulta(consulta).subscribe(
+        data => {
+          this.agendas = data;
+        }, error => {
+          console.error(error);
+        }
+      );
+    }
   }
 
 }

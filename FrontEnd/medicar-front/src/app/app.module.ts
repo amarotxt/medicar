@@ -18,7 +18,7 @@ import { AgendaComponent } from './components/agenda/agenda.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
