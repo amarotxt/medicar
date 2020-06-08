@@ -9,7 +9,5 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private router: Router){  }
 
-  openEspecialidade = () => {
-    this.router.navigate(['list-especialidades']);
-  }
+  
 }

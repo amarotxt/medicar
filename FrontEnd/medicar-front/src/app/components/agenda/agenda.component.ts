@@ -11,7 +11,7 @@ export class AgendaComponent implements OnInit {
   agendas: Array<any>;
   selctAgenda: any;
   constructor(
-    private router: Router, 
+    // private router: Router, 
     private _route: ActivatedRoute,
     private api: ApiService
   ) { }

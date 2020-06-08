@@ -15,14 +15,14 @@ export class UserService {
 
   registerUser(user: User) {
     const body: User = {
-      UserName: user.UserName,
-      Password: user.Password,
-      Email: user.Email,
-      FirstName: user.FirstName,
-      LastName: user.LastName
+      username: user.username,
+      password: user.password,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname
     }
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
-    return this.http.post(this.rootUrl + '/api/User/Register', body,{headers : reqHeader});
+    return this.http.post(`${this.rootUrl}usuario/`, body,{headers : reqHeader});
   }
 
   userAuthentication(userName, password) {
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   getUserData(){
-   return  this.http.get(this.rootUrl+'api/cliente');
+   return  this.http.get(this.rootUrl+'usuario');
   }
 
 }

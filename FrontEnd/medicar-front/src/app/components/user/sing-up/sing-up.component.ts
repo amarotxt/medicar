@@ -23,11 +23,11 @@ export class SingUpComponent implements OnInit{
     if (form != null)
       form.reset();
     this.user = {
-      UserName: '',
-      Password: '',
-      Email: '',
-      FirstName: '',
-      LastName: ''
+      username: '',
+      password: '',
+      email: '',
+      firstname: '',
+      lastname: ''
     }
   }
 
@@ -36,7 +36,7 @@ export class SingUpComponent implements OnInit{
       .subscribe((data: any) => {
         if (data.Succeeded == true) {
           this.resetForm(form);
-          this.toastr.success('User registration successful');
+          this.toastr.success('Usuário  Criado com sucesso');
         }
         else
           this.toastr.error(data.Errors[0]);

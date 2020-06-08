@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'medico',
     'consulta',
     'especialidade',
+    'cliente',
     'agenda'
 
 ]
@@ -171,6 +172,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://0.0.0.0:4200',
     'http://0.0.0.0:3001',
 )
+
 # #Configurar login com google configurar valores na ENV 
 # SOCIALACCOUNT_PROVIDERS = {
 #     'google': {
