@@ -3,9 +3,9 @@ version: '3'
 services:
   db:
     image: postgres
-    # environment: 
-    #   POSTGRES_DB: "db"
-    #   POSTGRES_PASSWORD: "qwerty"
+    environment: 
+      POSTGRES_DB: "db"
+      POSTGRES_PASSWORD: "qwerty"
     env_file: 
       - ./BackEnd/.env
     volumes:
@@ -25,16 +25,17 @@ services:
     depends_on:
       - db
 
-  # medicar-front:
-  #   build: 
-  #     context: .
-  #     dockerfile: ./FrontEnd/Dockerfile
-  #   command: npm run dev
-  #   # env_file: 
-  #   #   - .env
-  #   volumes:
-  #     - ./FrontEnd/medicar/:/app/
-  #   ports:
-  #     - "3001:3000"
+  medicar-front:
+    build: 
+      context: .
+      dockerfile: ./FrontEnd/Dockerfile
+    command: npm start 
+    # env_file: 
+    #   - .env
+    volumes:
+      - ./FrontEnd/medicar-front/:/app/
+    ports:
+      - "3001:4200"
+
 volumes:
   postgres_data:

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from './../../environments/environment.prod';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,12 +8,12 @@ import { Observable } from 'rxjs';
 })
 
 export class ApiService {
-  baseUrl = 'http://localhost:8000/';
+  baseUrl = environment.URLAPI;
   httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient) { }
 
   getAllEspecialidades(): Observable<any>{
-    return this.http.get(`${this.baseUrl}especialidades`,
+    return this.http.get(`${this.baseUrl}especialidades/`,
     {headers: this.httpHeaders })
   }
   getMedicosEspecialidade(especialidadeId): Observable<any>{

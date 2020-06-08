@@ -33,7 +33,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
    
 )
 INSTALLED_APPS = [
@@ -45,14 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_extensions',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+  
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
-    'usuario',
     'medico',
     'consulta',
     'especialidade',
@@ -65,12 +62,12 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware', # Note that this needs to be placed above CommonMiddleware
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # Note that this needs to be placed above CommonMiddleware
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'medicar.urls'
@@ -156,9 +153,7 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAuthenticated',
     # ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
@@ -166,24 +161,24 @@ REST_FRAMEWORK = {
     # 'TIME_INPUT_FORMATS': ['%H:%M'],
 }
 
-
+# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = ['no-auth','content-type','authorization']
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
+    'http://localhost:3001',
+    'http://localhost:3000',
+    'http://0.0.0.0:3000',
+    'http://0.0.0.0:4200',
+    'http://0.0.0.0:3001',
 )
-#Configurar login com google configurar valores na ENV 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
+# #Configurar login com google configurar valores na ENV 
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
  
-        'APP': {
-            'client_id':  os.environ.get("GOOGLE_ID", "0000"),
-            'secret':  os.environ.get("GOOGLE_SECRET", "0000"),
-            'key': os.environ.get("GOOGLE_KEY", "0000"),
-        }
-    }
-}
-
-
-# JWT CONFIG AUTHENTICATION
-JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'medicar.utils.my_jwt_response_handler'
-}
+#         'APP': {
+#             'client_id':  os.environ.get("GOOGLE_ID", "0000"),
+#             'secret':  os.environ.get("GOOGLE_SECRET", "0000"),
+#             'key': os.environ.get("GOOGLE_KEY", "0000"),
+#         }
+#     }
+# }

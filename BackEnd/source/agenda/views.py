@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from agenda.models import Agenda
 from agenda.serializers import AgendaSerializer
@@ -21,8 +21,7 @@ class AgendaRegrasdeNegocio(object):
             if agenda.dia == datetime.now().date():
                 for passado in agenda.horarios.all():
                     if passado.horario.strftime('%H:%M') < datetime.now().strftime('%H:%M'):
-                        raise Exception(f'{datetime.today().hour}:{datetime.today().minute}')
-                        agenda.horarios.remove(passado.id)
+                        agenda.horarios.remove(passado)
 
         # Horários que foram preenchidos devem ser excluídos da listagem(ao
         # cadastrar consulta o horario esta sendo removido da agenda
@@ -46,8 +45,8 @@ class AgendaRegrasdeNegocio(object):
 class AgendaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    authentication_classes = (TokenAuthentication, SessionAuthentication, )
+    permission_classes = (IsAuthenticated, )
     filter_class = AgendaFilter
     filter_backends = (DjangoFilterBackend, )
     # filterset_fields = ['medico', ]
