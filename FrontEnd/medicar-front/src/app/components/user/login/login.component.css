@@ -6,3 +6,15 @@
     color: #49B4BB !important;
     background-color: none;
 }
+.form-signin{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.img-size{
+    width: 50%;
+    height: 50%;
+    text-align: none ;
+}

@@ -23,25 +23,30 @@ export class SingUpComponent implements OnInit{
     if (form != null)
       form.reset();
     this.user = {
-      username: '',
-      password: '',
-      email: '',
-      firstname: '',
-      lastname: ''
+      UserName: '',
+      Password: '',
+      ConfirmPassword: '',
+      Email: '',  
     }
   }
 
   OnSubmit(form: NgForm) {
     this.userService.registerUser(form.value)
       .subscribe((data: any) => {
-        if (data.Succeeded == true) {
-          this.resetForm(form);
-          this.toastr.success('Usuário  Criado com sucesso');
-        }
-        else
-          this.toastr.error(data.Errors[0]);
+        this.resetForm(form);
+        this.toastr.success(`Usuário ${data['username']} Criado com sucesso`);
+      } , error => {
+        this.toastr.error(error) 
+        console.error(error);
       });
   }
 
+  ConfirmPassword = (ConfirmPassword,Password) => {
+    if (ConfirmPassword  != Password) 
+      return true
+    else 
+      return false
+
+  } 
 
 }

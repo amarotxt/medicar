@@ -14,12 +14,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   registerUser(user: User) {
-    const body: User = {
-      username: user.username,
-      password: user.password,
-      email: user.email,
-      firstname: user.firstname,
-      lastname: user.lastname
+    const body = {
+      username: user.UserName,
+      password: user.Password,
+      email: user.Email,
     }
     var reqHeader = new HttpHeaders({'No-Auth':'True'});
     return this.http.post(`${this.rootUrl}usuario/`, body,{headers : reqHeader});
