@@ -33,7 +33,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 
     # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
    
 )
 INSTALLED_APPS = [
@@ -45,10 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django_extensions',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
+  
     'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
@@ -164,9 +161,15 @@ REST_FRAMEWORK = {
     # 'TIME_INPUT_FORMATS': ['%H:%M'],
 }
 
-
+# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = ['no-auth','content-type','authorization']
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
+    'http://localhost:3001',
+    'http://localhost:3000',
+    'http://0.0.0.0:3000',
+    'http://0.0.0.0:4200',
+    'http://0.0.0.0:3001',
 )
 # #Configurar login com google configurar valores na ENV 
 # SOCIALACCOUNT_PROVIDERS = {

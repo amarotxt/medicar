@@ -1,4 +1,5 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -7,6 +8,15 @@ import { AppComponent } from './app.component';
 import { MedicosComponent } from './components/medicos/medicos.component';
 import { EspecialidadesComponent } from './components/especialidades/especialidades.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { SingUpComponent } from './components/user/sing-up/sing-up.component';
+import { FormsModule } from '@angular/forms';
+import { UserService } from './components/user/shared/user.service';
+import { AuthGuard } from './components/auth/auth.guard';
+import { AuthInterceptor } from './components/auth/auth.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -14,13 +24,25 @@ import { AgendaComponent } from './components/agenda/agenda.component';
     MedicosComponent,
     EspecialidadesComponent,
     AgendaComponent,
+    UserComponent,
+    LoginComponent,
+    SingUpComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    FormsModule,
     AppRoutingModule,
-    HttpClientModule
   ],
-  providers: [HttpClient],
+  providers: [UserService,AuthGuard,
+    ,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : AuthInterceptor,
+      multi : true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

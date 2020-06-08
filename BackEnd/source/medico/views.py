@@ -13,7 +13,7 @@ from medico.serializers import MedicoSerializer
 class MedicoViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Medico.objects.all()
     serializer_class = MedicoSerializer
-    authentication_classes = (TokenAuthentication, )
+    authentication_classes = (TokenAuthentication,SessionAuthentication )
     permission_classes = (IsAuthenticated, )
     filter_backends = (DjangoFilterBackend, filters.SearchFilter, )
     search_fields = ['nome']

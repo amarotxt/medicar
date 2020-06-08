@@ -23,11 +23,10 @@ class Consulta(models.Model):
            
             raise ValidationError(
                 "Não é possível cadastrar consultas para datas passadas.")
-        else:
-            if time_now > hora:
+       
+        if today == data and time_now > hora:
                 raise ValidationError(
                     "Não é possível cadastrar consultas para horas passadas.")
-        return
 
     @classmethod
     def check_usuario_possui_consulta(cls, user, dia, horario):
@@ -39,18 +38,6 @@ class Consulta(models.Model):
             user__pk=user.pk, agenda__dia=dia, horario=horario).exists()
         if consultas_user:
             raise ValidationError("O usuário já possui consulta para esta data.")
-        return
-
-    @classmethod
-    def check_agenda_ocupada(cls, agenda, horario):
-        # Regra de negocio
-        # Não deve ser possível marcar uma consulta se
-        #  o usuário já possui uma consulta marcada no
-        #  mesmo dia e horário
-        consulta = Consulta.objects.filter(
-            agenda=agenda, horario=horario).exists()
-        if consulta:
-            raise ValidationError("Este horário já está preenchido.")
         return
 
     @classmethod
@@ -75,6 +62,5 @@ class Consulta(models.Model):
         self.check_data_hora_passado(self.agenda.dia, self.horario)
         self.check_usuario_possui_consulta(
             self.user, self.agenda.dia, self.horario)
-        self.check_agenda_ocupada(self.agenda, self.horario)
         self.check_agenda_horario_invalido(self.agenda, self.horario)
 

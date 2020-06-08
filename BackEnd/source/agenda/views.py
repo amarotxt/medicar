@@ -21,8 +21,7 @@ class AgendaRegrasdeNegocio(object):
             if agenda.dia == datetime.now().date():
                 for passado in agenda.horarios.all():
                     if passado.horario.strftime('%H:%M') < datetime.now().strftime('%H:%M'):
-                        raise Exception(f'{datetime.today().hour}:{datetime.today().minute}')
-                        agenda.horarios.remove(passado.id)
+                        agenda.horarios.remove(passado)
 
         # Horários que foram preenchidos devem ser excluídos da listagem(ao
         # cadastrar consulta o horario esta sendo removido da agenda
