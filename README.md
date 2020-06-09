@@ -1,6 +1,6 @@
 #  API Medicar (v0.1)
 
-API para Estacionamento
+API para Marcar Consulta
 ### Sumário
 + [Pré Requisitos](#pré-requisitos)
 + [Comandos da aplicação](#comandos-da-aplicação)
@@ -13,6 +13,7 @@ API para Estacionamento
 + [Django rest](https://www.django-rest-framework.org/)
 
 ### Comandos da aplicação
+- Criar arquivo .env apartir do arquivo .env.prod
 - Apartir da rais Primeiro comando:
 ```
 # docker-compose up 
