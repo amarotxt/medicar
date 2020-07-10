@@ -17,6 +17,7 @@ import { UserService } from './components/user/shared/user.service';
 import { AuthGuard } from './components/auth/auth.guard';
 import { AuthInterceptor } from './components/auth/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { ConsultasComponent } from './consultas/consultas.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     SingUpComponent,
     HomeComponent,
+    ConsultasComponent,
   ],
   imports: [
     BrowserModule,

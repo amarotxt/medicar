@@ -1,6 +1,7 @@
-<div *ngIf="isLoginError" class="alert alert-danger">
-    <i class="material-icons">error</i> usuário ou senha incorretos
-</div>
+<div style="    display: flex !important;">
+  <div *ngIf="isLoginError" class="alert alert-danger">
+      <i class="material-icons">error</i> usuário ou senha incorretos
+  </div>
 
   <div class="container">
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
@@ -20,3 +21,4 @@
       <button class="btn btn-lg btn-block color-green" type="submit" routerLink='/signup' routerLinkActive='active'>Critar Conta</button>
     </form>
   </div>
+</div>

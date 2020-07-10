@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit{
   }
 
   OnSubmit(userName,password){
-     this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
+    this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
+      console.log(data);
       localStorage.setItem('userToken',data.token);
       this.router.navigate(['/home']);
     },

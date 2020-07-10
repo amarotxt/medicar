@@ -1,0 +1,34 @@
+
+<div >
+    <nav class="nav">
+        <a class="nav-link active" href="#">
+            <img class="mb-2 img-size" src="https://raw.githubusercontent.com/Intmed-Software/vagas/master/assets/logo.png"  alt="image" >
+        </a>
+
+    </nav>
+    <nav class="nav">
+        <h3 class="nav-link active" href="#">
+            Consultas clinica
+        </h3>
+    </nav>
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Especialidade</th>
+        <th scope="col">Profissional</th>
+        <th scope="col">Data</th>
+        <th scope="col">Hora</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let consulta of consultas">
+            <th scope="row">oque e isso</th>
+            <td>{{consulta.medico.especialidade.nome}}</td>
+            <td>{{consulta.medico.nome}}</td>
+            <td>{{consulta.dia}}</td>
+            <td>{{consulta.horario}}</td>
+        </tr>
+    </tbody>
+    </table>
+
+</div>

@@ -16,6 +16,7 @@ export class EspecialidadesComponent implements OnInit {
   ngOnInit(): void {
     this.getEspecialidades()
   }
+  
   getEspecialidades = () => {
     this.api.getAllEspecialidades().subscribe(
       data => {

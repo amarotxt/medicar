@@ -8,6 +8,7 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { AuthGuard } from './components/auth/auth.guard';
 import { SingUpComponent } from './components/user/sing-up/sing-up.component';
+import { ConsultasComponent } from './consultas/consultas.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   },
   { path : '', redirectTo:'/login', pathMatch : 'full'},
   {path: 'list-especialidades', component: EspecialidadesComponent},
+  {path: 'list-consultas', component: ConsultasComponent},
   {path: 'list-medicos/:especialidadeId', component: MedicosComponent},
   {path: 'list-agendas/:medicoId', component: AgendaComponent},
 ];
