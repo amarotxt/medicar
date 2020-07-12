@@ -1,7 +1,9 @@
+import { ApiService } from './services/api.service';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,8 @@ import { UserService } from './components/user/shared/user.service';
 import { AuthGuard } from './components/auth/auth.guard';
 import { AuthInterceptor } from './components/auth/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { ConsultasComponent } from './consultas/consultas.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     LoginComponent,
     SingUpComponent,
     HomeComponent,
+    ConsultasComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,14 +41,16 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
   ],
-  providers: [UserService,AuthGuard,
-    ,
+  providers: [UserService,AuthGuard,ApiService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
-    }],
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

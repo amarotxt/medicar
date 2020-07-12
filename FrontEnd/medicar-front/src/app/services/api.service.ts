@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment.prod';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class ApiService {
   baseUrl = environment.URLAPI;
@@ -14,7 +12,7 @@ export class ApiService {
 
   getAllEspecialidades(): Observable<any>{
     return this.http.get(`${this.baseUrl}especialidades/`,
-    {headers: this.httpHeaders })
+    {headers: this.httpHeaders });
   }
   getMedicosEspecialidade(especialidadeId): Observable<any>{
     return this.http.get(`${this.baseUrl}medicos/?especialidade=${especialidadeId}`,
@@ -28,4 +26,11 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}consultas/`, consulta,
     {headers: this.httpHeaders });
   }
+  getConsultas(): Observable<any> {
+    console.log(`${this.baseUrl}consultas/`)
+      
+    return this.http.get(`${this.baseUrl}consultas/`,
+    {headers: this.httpHeaders });
+  }
+  
 }
