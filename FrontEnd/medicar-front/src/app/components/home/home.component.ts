@@ -8,23 +8,14 @@ import { UserService } from './../user/shared/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userClaims: any;
-
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUserData().subscribe((data: any) => {
-      this.userClaims = data;
 
-    });
   }
 
-  Logout() {
-    localStorage.removeItem('userToken');
-    this.router.navigate(['/login']);
-  }
   openEspecialidade = () => {
-    this.router.navigate(['list-especialidades']);
+    console.log("ativar especialidade")
   }
 
 }

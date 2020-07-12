@@ -16,16 +16,18 @@ export class LoginComponent implements OnInit{
   }
 
   OnSubmit(userName,password){
-    this.userService.userAuthentication(userName,password).subscribe((data : any)=>{
-      console.log(data);
-      localStorage.setItem('userToken',data.token);
-      this.router.navigate(['/home']);
-    },
-    (err : HttpErrorResponse)=>{
-      this.isLoginError = true;
-    });
+    this.userService.userAuthentication(userName,password).subscribe(data => {
+      
+      console.log(this.userService.usuario)
+      localStorage.setItem('userToken',data["token"]);
+      localStorage.setItem('userId',data["user_id"]);
+      this.router.navigate(['/list-consultas']);
+    }, error => {
+      console.error(error);
+      }
+    );
+    
   }
-
 }
 
 

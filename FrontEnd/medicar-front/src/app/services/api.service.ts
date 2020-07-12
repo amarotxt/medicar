@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment.prod';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class ApiService {
   baseUrl = environment.URLAPI;
@@ -28,8 +26,9 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}consultas/`, consulta,
     {headers: this.httpHeaders });
   }
-  getConsultas(): Observable<any>{
+  getConsultas(): Observable<any> {
     console.log(`${this.baseUrl}consultas/`)
+      
     return this.http.get(`${this.baseUrl}consultas/`,
     {headers: this.httpHeaders });
   }
