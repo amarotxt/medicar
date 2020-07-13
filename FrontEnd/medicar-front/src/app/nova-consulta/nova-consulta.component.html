@@ -1,0 +1,60 @@
+<!--app-especialidades></app-especialidades-->
+<div class="center ">
+    <div class="consulta-box">
+        <div class="conteiner">
+            <div div="row justify-content-start">
+                <div div="col">
+                    <label class="titulo color-black mb-5">Nova Consulta </label>
+                </div>  
+            </div>
+            <div>
+                <form [formGroup]="especialidades" (change)="getMedico(especialidades.value.especialidade)" >
+                    <div class="form-group row mb-4">
+                            <select id="especialidade" class="form-control form-control-lg" formControlName="especialidade" >
+                                <option disabled [ngValue]="">Especialidades</option>
+                                <option id="especialidade.id" [ngValue]="especialidade" *ngFor="let especialidade of especialidadesList"  >
+                                    {{especialidade.nome}}
+                                </option>
+                            </select>
+                    </div>
+                </form>
+                <form [formGroup]="medicos" (change)="getDataMedico(medicos.value.medico)" >  
+                    <div class="form-group row mb-4" >
+                            <select id="medico" class="form-control form-control-lg" formControlName="medico"  [disabled]="!especialidades.value.especialidade">
+                                <option   disabled [ngValue]="">Médico</option>
+                                <option id="medico.id" [ngValue]="medico" *ngFor="let medico of medicosList"  >
+                                    {{medico.nome}}
+                                </option>
+                            </select>
+                    </div>
+                </form>
+                <form [formGroup]="datas"  >  
+                    <div class="form-group row mb-4">
+                            <select id="data" class="form-control form-control-lg"  formControlName="data" placeholder="Data" disabled="disabled">
+                                <option  hidden>Data</option>
+                                <option *ngfor="">...</option>
+                            </select>
+                    </div>
+                </form>                    
+                <form [formGroup]="horas"  >  
+                    <div class="form-group row mb-4">
+                            <select id="hora" class="form-control form-control-lg" formControlName="hora" placeholder="Hora" disabled="disabled">
+                                <option  hidden>Hora</option>
+                                <option *ngfor="">...</option>
+                            </select>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="btn-groupr">
+                        <button class="btn btn-lg btn-block color-green btn-groupr mr-2" type="submit" routerLink='/list-consultas' routerLinkActive='active'>Cancelar</button>
+                    </div>
+                </div>
+                <div class="col">
+                    <button class="btn btn-lg btn-primary btn-block color-green-bg btn-groupr mr-2 " type="submit" disabled="disabled">Confirmar</button>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>
