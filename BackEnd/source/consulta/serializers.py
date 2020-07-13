@@ -3,6 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from agenda.models import Agenda
 # from agenda.serializers import AgendaSerializer
+from medico.serializers import MedicoSerializer
 from django.core.serializers.json import DjangoJSONEncoder
 
 
@@ -34,16 +35,9 @@ class ConsultaSerializer(ModelSerializer):
 
       agenda = Agenda.objects.filter(pk=obj.agenda_id).first()
       if agenda:
-         data = {
-            "id": agenda.medico.id, 
-            "crm": agenda.medico.crm, 
-            "nome": agenda.medico.nome, 
-            "especialidade": {
-               "id" : agenda.medico.especialidade.id,
-               "nome" : agenda.medico.especialidade.nome,
-               } 
-         }
+         medico = MedicoSerializer(agenda.medico)
+     
       else :
          return None
 
-      return data
+      return medico.data
