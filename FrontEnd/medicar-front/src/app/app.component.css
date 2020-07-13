@@ -1,0 +1,11 @@
+.color-green-bg {
+    background-color: #49B4BB !important;
+    border: none;
+}
+
+.color-green {
+    background-color: white;
+    color:  #49B4BB;
+    border: none;
+}
+

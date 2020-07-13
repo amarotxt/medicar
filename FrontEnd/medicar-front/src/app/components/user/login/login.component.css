@@ -1,0 +1,34 @@
+.color-green-bg {
+    background-color: #49B4BB !important;
+    border: none;
+}
+.color-green {
+    color: #49B4BB !important;
+    background-color: none;
+}
+.color-gray{
+    color :#A8A8A8;
+}
+.form-signin{
+    width: 100%;
+    max-width: 30%;
+    padding: 15px;
+    margin: auto;
+}
+
+.img-size{
+    width: 50%;
+    height: 50%;
+    text-align: none ;
+}
+
+.conteiner-box{
+    display: flex !important;    
+    justify-content: center;
+    align-items: center;
+    height: 100vh !important;
+}
+
+.btn-toolbar{
+    justify-content: center;
+}
