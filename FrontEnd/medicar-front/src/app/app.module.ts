@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NovaConsultaComponent } from './nova-consulta/nova-consulta.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { NovaConsultaComponent } from './nova-consulta/nova-consulta.component';
     BrowserAnimationsModule,
     MatSliderModule,
   ],
-  providers: [UserService,AuthGuard,ApiService,
+  providers: [UserService,AuthGuard,ApiService, CookieService,
     {
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
