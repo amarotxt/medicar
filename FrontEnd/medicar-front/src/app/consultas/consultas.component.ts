@@ -13,7 +13,7 @@ export class ConsultasComponent implements OnInit {
   public userData = {};
 
   constructor( private api: ApiService , private userService: UserService, private router: Router) { 
-    console.log("aq",userService.usuario)
+  
   }
 
   ngOnInit(): void {
