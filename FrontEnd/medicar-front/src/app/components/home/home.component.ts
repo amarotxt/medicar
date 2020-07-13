@@ -8,14 +8,14 @@ import { UserService } from './../user/shared/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(public userService: UserService) { }
+  constructor(private router: Router, public userService: UserService) { }
 
   ngOnInit() {
 
   }
 
   openEspecialidade = () => {
-    console.log("ativar especialidade")
+    this.router.navigate(['list-especialidades']);
   }
 
 }

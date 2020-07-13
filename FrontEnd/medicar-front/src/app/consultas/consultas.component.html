@@ -33,7 +33,7 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item ">
                                 <button class="nav-link btn btn-lg btn-block color-green-bg" >
-                                    <div class="color-white disp-flex">
+                                    <div class="color-white disp-flex" (click)="newColsulta()">
                                         <span class="material-icons">add</span>
                                         <div class="">
                                             Nova Consulta
@@ -63,7 +63,7 @@
                             <td>{{consulta.dia}}</td>
                             <td>{{consulta.horario}}</td>
                             <td>
-                                <div class="row color-green disp-flex mr-4" >
+                                <div class="row color-green disp-flex mr-4" (click)="deleteConsulta(consulta)" >
                                     <span class="material-icons mr-2 text-center" id="desmarcar{{i}}">close</span> 
                                     <label for="desmarcar{{i}}" > Desmarcar</label>
                                 </div>

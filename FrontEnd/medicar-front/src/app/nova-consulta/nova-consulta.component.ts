@@ -11,6 +11,7 @@ export class NovaConsultaComponent implements OnInit {
   especialidadesList : Array<any>;
   medicosList : Array<any>;
   dataList: Array<any>;
+  horasList: Array<any>;
   especialidades : FormGroup;
   medicos : FormGroup;
   datas : FormGroup;
@@ -46,24 +47,36 @@ export class NovaConsultaComponent implements OnInit {
   }
  
   getMedico = (especidalidade) => {
-    console.log("especialidade",especidalidade)
-    this.api.getMedicosEspecialidade(especidalidade["id"]).subscribe(
-      data => {
-        this.medicosList = data;
-      }, error => {
-        console.error(error);
-      }
-    );
+    if (especidalidade != null){
+      console.log("especialidade",especidalidade)
+      this.api.getMedicosEspecialidade(especidalidade["id"]).subscribe(
+        data => {
+          this.medicosList = data;
+        }, error => {
+          console.error(error);
+        }
+      );
+    }
   }
 
   getDataMedico = (medico) => {
-    this.api.getAgendasMedico(medico).subscribe(
-      data => {
-        this.datas = data;
-      }, error => {
-        console.error(error);
-      }
-    );
+    if (medico != null){
+      this.api.getAgendasMedico(medico["id"]).subscribe(
+        data => {
+          this.dataList = data;
+          console.log("dataList ",this.dataList )
+        }, error => {
+          console.error(error);
+        }
+      );
+    }
   }
 
+  getHorarioMedico = (data) => {
+    if (data != null){
+      this.horasList = data["horarios"];
+      
+    }
+  }
+  
 }

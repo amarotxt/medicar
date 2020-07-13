@@ -32,5 +32,12 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}consultas/`,
     {headers: this.httpHeaders });
   }
+  deleteConsulta(consultaID): Observable<any> {
+    console.log(`${this.baseUrl}consultas/delete`)
+      
+    return this.http.delete(`${this.baseUrl}consultas/${consultaID}`,
+    {headers: this.httpHeaders });
+  }
+
   
 }

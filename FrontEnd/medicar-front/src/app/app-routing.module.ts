@@ -1,3 +1,4 @@
+import { NovaConsultaComponent } from './nova-consulta/nova-consulta.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { MedicosComponent } from './components/medicos/medicos.component';
 import { EspecialidadesComponent } from './components/especialidades/especialidades.component';
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path : '', redirectTo:'/login', pathMatch : 'full'},
   {path: 'list-especialidades', component: EspecialidadesComponent},
   {path: 'list-consultas', component: ConsultasComponent},
+  {path: 'consulta', component: NovaConsultaComponent},
+  
   {path: 'list-medicos/:especialidadeId', component: MedicosComponent},
   {path: 'list-agendas/:medicoId', component: AgendaComponent},
 ];

@@ -8,43 +8,48 @@
                 </div>  
             </div>
             <div>
-                <form [formGroup]="especialidades" (change)="getMedico(especialidades.value.especialidade)" >
+                <form [formGroup]="especialidades" (click)="getMedico(especialidades.value.especialidade)" >
                     <div class="form-group row mb-4">
-                            <select id="especialidade" class="form-control form-control-lg" formControlName="especialidade" >
-                                <option disabled [ngValue]="">Especialidades</option>
-                                <option id="especialidade.id" [ngValue]="especialidade" *ngFor="let especialidade of especialidadesList"  >
+                            <select id="especialidade"  class="selectpicker form-control form-control-lg" formControlName="especialidade" >
+                                <option hidden  value="">Especialidades</option>
+                                <option id="especialidade{{especialidade.id}}" [ngValue]="especialidade" *ngFor="let especialidade of especialidadesList"  >
                                     {{especialidade.nome}}
                                 </option>
                             </select>
                     </div>
                 </form>
-                <form [formGroup]="medicos" (change)="getDataMedico(medicos.value.medico)" >  
+                <form [formGroup]="medicos" (click)="getDataMedico(medicos.value.medico)" >  
                     <div class="form-group row mb-4" >
-                            <select id="medico" class="form-control form-control-lg" formControlName="medico"  [disabled]="!especialidades.value.especialidade">
-                                <option   disabled [ngValue]="">Médico</option>
-                                <option id="medico.id" [ngValue]="medico" *ngFor="let medico of medicosList"  >
+                            <select id="medico" class="form-control form-control-lg" formControlName="medico" >
+                                <option   disabled >Médico</option>
+                                <option id="medico{{ medico.id }}" [ngValue]="medico" *ngFor="let medico of medicosList"  >
                                     {{medico.nome}}
                                 </option>
                             </select>
                     </div>
                 </form>
-                <form [formGroup]="datas"  >  
+                <form [formGroup]="datas" (click)="getHorarioMedico(datas.value.data)" >  
                     <div class="form-group row mb-4">
-                            <select id="data" class="form-control form-control-lg"  formControlName="data" placeholder="Data" disabled="disabled">
-                                <option  hidden>Data</option>
-                                <option *ngfor="">...</option>
+                            <select id="data" class="form-control form-control-lg"  formControlName="data" placeholder="Data" [disabled]="!medicos.value.medico">
+                                <option disabled >Data</option>
+                                <option id="data{{ data.id }}" [ngValue]="data" *ngFor="let data of dataList" >
+                                    {{data.dia}}
+                                </option>
                             </select>
                     </div>
                 </form>                    
                 <form [formGroup]="horas"  >  
                     <div class="form-group row mb-4">
-                            <select id="hora" class="form-control form-control-lg" formControlName="hora" placeholder="Hora" disabled="disabled">
-                                <option  hidden>Hora</option>
-                                <option *ngfor="">...</option>
+                            <select id="hora" class="form-control form-control-lg" formControlName="hora" placeholder="Hora"  [disabled]="!datas.value.data">
+                                <option  disabled >Hora</option>
+                                <option id="hora{{ hora.id }}" [ngValue]="hora" *ngFor="let hora of horasList" >
+                                    {{hora}}
+                                </option>
                             </select>
                     </div>
                 </form>
             </div>
+            
             <div class="row">
                 <div class="col">
                     <div class="btn-groupr">

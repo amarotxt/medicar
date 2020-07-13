@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserService } from './../components/user/shared/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../services/api.service';
@@ -11,20 +12,12 @@ export class ConsultasComponent implements OnInit {
   consultas : any;
   public userData = {};
 
-  constructor( private api: ApiService , private userService: UserService) { 
+  constructor( private api: ApiService , private userService: UserService, private router: Router) { 
     console.log("aq",userService.usuario)
   }
 
   ngOnInit(): void {
-    
-    this.api.getConsultas().subscribe(
-      data => {
-        this.consultas = data;
-        
-      }, error => {
-        console.error(error);
-      }
-    );
+    this.getConsultas();
     // console.log("init",this.userService.usuario)
     this.userService.getUserData().subscribe(
         data => {
@@ -33,10 +26,22 @@ export class ConsultasComponent implements OnInit {
         }, error => {
           console.error(error);
         }
-      ); ;
+      ); 
     console.log("init",this.userService.usuario)
     
   }
+  getConsultas(){
+     
+    this.api.getConsultas().subscribe(
+      data => {
+        this.consultas = data;
+        
+      }, error => {
+        console.error(error);
+      }
+    );
+  }
+
   Logout(){
     this.userService.Logout()
   }
@@ -49,5 +54,16 @@ export class ConsultasComponent implements OnInit {
       return this.userData["username"]
     }
   }
+  newColsulta(){
+    this.router.navigate(['/consulta'])
+  }
 
+  deleteConsulta(consulta){
+    this.api.deleteConsulta(consulta.id).subscribe(data =>{
+      this.getConsultas();
+    }, error =>{
+      console.error(error);
+    });
+    
+  }
 }

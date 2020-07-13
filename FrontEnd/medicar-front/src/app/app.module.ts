@@ -14,13 +14,14 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { SingUpComponent } from './components/user/sing-up/sing-up.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './components/user/shared/user.service';
 import { AuthGuard } from './components/auth/auth.guard';
 import { AuthInterceptor } from './components/auth/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NovaConsultaComponent } from './nova-consulta/nova-consulta.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +34,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SingUpComponent,
     HomeComponent,
     ConsultasComponent,
+    NovaConsultaComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
