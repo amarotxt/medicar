@@ -1,4 +1,4 @@
-<div class="conteiner">
+<div class="conteiner-box">
 
     <form #loginForm="ngForm" class="form-signin" (ngSubmit)="OnSubmit(UserName.value,Password.value,remember.checked)">
       <div *ngIf="isLoginError" class="alert alert-danger">
@@ -8,11 +8,11 @@
       <img class="mb-2 img-size" src="https://raw.githubusercontent.com/Intmed-Software/vagas/master/assets/logo.png"  alt="image" >
     
       <label for="inputEmail" class="sr-only color-gray">Login</label>
-      <input type="email" id="inputEmail" class="form-control mb-4" placeholder="Email address"  autofocus="" #UserName [(ngModel)]="formData.userName" name="UserName" placeholder="Login" required />
-      
-      <label for="inputPassword" class="sr-only color-gray"> Senha</label> 
+      <input type="email" id="inputEmail" class="form-control mb-4 " placeholder="Email address"  autofocus="" #UserName [(ngModel)]="formData.userName" name="UserName" placeholder="Login" required >
+      <label for="inputPassword" class="sr-only color-gray"> Senha  </label> 
       <input type="password" id="inputPassword" class="form-control mb-4" #Password [(ngModel)]="formData.password" name="Password" placeholder="Senha" required />
-        
+     
+       
       <div class="checkbox mb-3 color-gray">
         <label>
           <input type="checkbox" #remember  name="remember"  /> Lembrar minha senha 
