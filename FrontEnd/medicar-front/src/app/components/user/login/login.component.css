@@ -32,3 +32,6 @@
 .btn-toolbar{
     justify-content: center;
 }
+.button-eye{
+    cursor: pointer;
+}

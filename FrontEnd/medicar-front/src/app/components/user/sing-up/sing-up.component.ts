@@ -12,7 +12,8 @@ import { User } from '../shared/user.model';
 export class SingUpComponent implements OnInit{
   user: User;
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-
+  showPassWord : boolean = false;
+  showConfirmPassWord : boolean = false;
   constructor(private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {

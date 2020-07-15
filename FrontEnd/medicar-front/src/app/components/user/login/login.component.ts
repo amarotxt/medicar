@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit{
   isLoginError : boolean = false;
   rememberMe : boolean =false
   public formData:any = {};
+  showPassWord : boolean = false;
+  showConfirmPassWord : boolean = false;
+
   constructor(private userService : UserService,
     private router : Router,
     private _cookie: CookieService) {
