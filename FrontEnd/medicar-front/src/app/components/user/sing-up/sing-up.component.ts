@@ -32,14 +32,21 @@ export class SingUpComponent implements OnInit{
   }
 
   OnSubmit(form: NgForm) {
-    this.userService.registerUser(form.value)
-      .subscribe((data: any) => {
-        this.resetForm(form);
-        this.toastr.success(`Usuário ${data['username']} Criado com sucesso`);
-      } , error => {
-        this.toastr.error(error) 
-        console.error(error);
-      });
+    if (this.user.Password != this.user.ConfirmPassword){
+      this.toastr.error("Senhas Distintas");
+    }else {
+      this.userService.registerUser(form.value)
+        .subscribe((data: any) => {
+          this.resetForm(form);
+          this.toastr.success(`Usuário ${data['username']} Criado com sucesso`);
+        } , error => {
+          (error.error);
+          Object.keys(error.error).forEach(key => {
+            let value = error.error[key];
+            this.toastr.error(value);
+          });
+        });
+    }
   }
 
   ConfirmPassword = (ConfirmPassword,Password) => {
